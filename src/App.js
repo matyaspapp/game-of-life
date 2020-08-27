@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import produce from 'immer';
 
 const NUM_ROWS = 30;
 const NUM_COLS = 30;
@@ -24,6 +24,12 @@ function App() {
         rows.map((col, j) =>
           <div
             key={`${i}-${j}`}
+            onClick={() => {
+              const newGrid = produce(grid, gridCopy => {
+                gridCopy[i][j] = 1
+              });
+              setGrid(newGrid);
+            }}
             style={{
               width: 18,
               height: 18,
